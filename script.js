@@ -373,6 +373,17 @@ function runSimpleScript() {
     const code = editor.getValue();
     const outputEl = document.getElementById('output');
     outputEl.textContent = '';
+
+    try {
+        new Function(code);
+        outputEl.textContent = 'Error: HEY! Stop putting JS here, we are learning SimpleScript! Enter VALID SimpleScript code.';
+        return;
+    } catch (e) {
+        // Continue to SimpleScript parsing
+    }
+
+
+
     try {
         const lexer = new Lexer(code);
         const parser = new Parser(lexer);
